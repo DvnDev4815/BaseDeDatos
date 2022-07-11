@@ -1,4 +1,3 @@
-from distutils.log import error
 import sqlite3, Funciones, datetime, os
 from sqlite3 import Error
 
