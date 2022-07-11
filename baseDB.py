@@ -1,11 +1,16 @@
+from distutils.log import error
 import sqlite3, Funciones, datetime, os
 from sqlite3 import Error
 
 CARPETA= ".baseDB"
 fnc= Funciones.funciones()
 
-os.makedirs(CARPETA)
-os.chdir(CARPETA)
+if CARPETA in os.listdir():
+	os.chdir(CARPETA)
+else:
+    os.mkdir(CARPETA)
+    os.chdir(CARPETA)
+    
 class Log:
     def __init__(self)-> None:
         self.ARCHIVO= open("log.txt", "w")
@@ -16,7 +21,7 @@ class Log:
         if lct == 1:
             self.ARCHIVO.write(f"{self.date}(SUCCES) {command} \n")
         elif lct == 2:
-            self.ARCHIVO.write(f"{self.date}(ERROR) {command} \n")
+            self.ARCHIVO.write(f"{self.date}(ERROR) {command}\n")
         else:
             print("No se puede crear el log")
 
@@ -35,9 +40,9 @@ class sql3:
 			self.loc.LOG_COMMAND(1, "CONEXION: Base se datos establecida")
 			print("CONEXION: Base se datos establecida")
 					
-		except:
+		except Error:
 			fnc.Func("Limpiar")
-			self.loc.LOG_COMMAND(2, "CONEXION: No se pudo conectar a la base de datos")
+			self.loc.LOG_COMMAND(2, f"CONEXION: No se pudo conectar a la base de datos// {Error}")
 			print("CONEXION: No se pudo conectar a la base de datos")
 
 	#Crea la tabla
@@ -48,9 +53,9 @@ class sql3:
 			self.loc.LOG_COMMAND(1, "CONEXION: Lista creada")
 			print("CONEXION: Lista creada")
    
-		except:
+		except Error:
 			fnc.Func("Limpiar")
-			self.loc.LOG_COMMAND(2, "CONEXION: La Lista ya a ha sido creada")
+			self.loc.LOG_COMMAND(2, f"CONEXION: La Lista ya a ha sido creada// {Error}")
 			print("CONEXION: La Lista ya a ha sido creada")
 
 	def InsertarNuevos_DB(self, datos):
@@ -64,7 +69,7 @@ class sql3:
    
 		except Error:
 			fnc.Func("Limpiar")
-			self.loc.LOG_COMMAND(2, "CONEXION: Los valores de entrada no pueden ser establecidos")
+			self.loc.LOG_COMMAND(2, f"CONEXION: Los valores de entrada no pueden ser establecidos// {Error}")
 			print("CONEXION: Los valores de entrada no pueden ser establecidos")
 
 	def MostrarDatos_DB(self):
@@ -82,7 +87,7 @@ class sql3:
    
 		except Error:
 			fnc.Func("Limpiar")
-			self.loc.LOG_COMMAND(2, "CONEXION: Los valores de entrada no pueden ser establecidos")
+			self.loc.LOG_COMMAND(2, f"CONEXION: Los valores de entrada no pueden ser establecidos// {Error}")
 			print("CONEXION: Los valores de entrada no pueden ser establecidos " + str(Error))
 
 	def Borrar_DB(self, iD):
@@ -94,9 +99,9 @@ class sql3:
 			self.loc.LOG_COMMAND(1, "CONEXION: Datos eleminados correctamente")
 			print("CONEXION: Datos eleminados correctamente")
 
-		except:
+		except Error:
 			fnc.Func("Limpiar")
-			self.loc.LOG_COMMAND(1, "CONEXION: No se pudieron eleminar los datos")
+			self.loc.LOG_COMMAND(1, f"CONEXION: No se pudieron eleminar los datos// {Error}")
 			print("CONEXION: No se pudieron eleminar los datos")
 
 
