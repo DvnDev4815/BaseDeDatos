@@ -1,0 +1,2 @@
+20:30:07(SUCCES) CONEXION: Base se datos establecida 
+20:30:07(SUCCES) CONEXION: Lista creada 
