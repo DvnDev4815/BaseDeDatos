@@ -11,7 +11,7 @@ class Ventana(ttk.Frame):
         self.prin= root
         
         #Propiedades de la ventana
-        self.prin.title("Base de datos: Gupo E -v1.0-")
+        self.prin.title("Base de datos -v5.7-")
         self.prin.resizable(False, False)
         self.prin.geometry("750x400")
         
@@ -24,6 +24,7 @@ class Ventana(ttk.Frame):
         self.btn_agregar= ttk.Button(text= "Agregar Elemento", command=self._second)
         self.btn_agregar.place(x= 600, y= 30, width= 140)
         
+        #Aun no implimentado
         #self.btn_modificar= ttk.Button(text= "Modificar Elemento")
         #self.btn_modificar.place(x= 600, y= 60, width= 140)
         
@@ -50,6 +51,7 @@ class Ventana(ttk.Frame):
         self.tree_datos.heading('#2', text= "Matricula", anchor= tkinter.CENTER)
         #Metodo que identifica cuando se hace click a un elemento
         self.tree_datos.bind("<Double-1>", self._select)
+        
         
     #metodo de salida del programa
     def _exit(self):
@@ -80,8 +82,6 @@ class Ventana(ttk.Frame):
     def _second(self):
         if not Insercion.Insercion_datos.En_uso:
             self.Ven_sec= Insercion.Insercion_datos()
-        
-        self._show()
             
 #Conectar con la base de datos            
 Conx.ComprobarRed_DB()

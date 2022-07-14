@@ -54,7 +54,7 @@ class Insercion_datos(tkinter.Toplevel):
         
     #Metodo para incertar los datos a la base
     def _Acept(self):
-        self.data= int(self.var_ID.get()), self.var_Nombre.get(), int(self.var_Matricula.get())
+        self.data= [int(self.var_ID.get()), self.var_Nombre.get(), int(self.var_Matricula.get())]
         Conx.InsertarNuevos_DB(self.data)
         Func.Esperar(1)
         self._Cancel()

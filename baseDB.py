@@ -1,5 +1,4 @@
 import sqlite3, Funciones, datetime, os
-from sqlite3 import Error
 
 CARPETA= ".baseDB"
 fnc= Funciones.funciones()
@@ -39,9 +38,10 @@ class sql3:
 			self.loc.LOG_COMMAND(1, "CONEXION: Base se datos establecida")
 			print("CONEXION: Base se datos establecida")
 					
-		except Error:
+		except self.conexion.Error as ERRN:
 			fnc.Func("Limpiar")
-			self.loc.LOG_COMMAND(2, f"CONEXION: No se pudo conectar a la base de datos// {Error}")
+   
+			self.loc.LOG_COMMAND(2, f"CONEXION: {ERRN}")
 			print("CONEXION: No se pudo conectar a la base de datos")
 
 	#Crea la tabla
@@ -52,42 +52,42 @@ class sql3:
 			self.loc.LOG_COMMAND(1, "CONEXION: Lista creada")
 			print("CONEXION: Lista creada")
    
-		except Error:
+		except self.conexion.Error as ERRN:
 			fnc.Func("Limpiar")
-			self.loc.LOG_COMMAND(2, f"CONEXION: La Lista ya a ha sido creada// {Error}")
+			self.loc.LOG_COMMAND(2, f"CONEXION {ERRN}")
 			print("CONEXION: La Lista ya a ha sido creada")
 
-	def InsertarNuevos_DB(self, datos):
+	def InsertarNuevos_DB(self, datos:list):
 		try:
-			self.Cursor.execute(f"INSERT INTO compañero VALUES(?, ?, ?)", datos)
+			self.Cursor.execute(f"INSERT INTO compañero VALUES({datos[0]}, '{datos[1]}', {datos[2]})")
 			self.conexion.commit()
 
 			fnc.Func("Limpiar")
 			self.loc.LOG_COMMAND(1, "CONEXION: Los valores establecidos")
 			print("CONEXION: Los valores establecidos")
    
-		except Error:
+		except self.conexion.Error as ERRN:
 			fnc.Func("Limpiar")
-			self.loc.LOG_COMMAND(2, f"CONEXION: Los valores de entrada no pueden ser establecidos// {Error}")
+			self.loc.LOG_COMMAND(2, f"CONEXION: {ERRN}")
 			print("CONEXION: Los valores de entrada no pueden ser establecidos")
 
 	def MostrarDatos_DB(self):
 		self.Cursor.execute("SELECT * FROM compañero")
 		return self.Cursor
 
-	def Acutalizar_DB(self,idd,datos2):
+	def Acutalizar_DB(self, id:int , datos2:list):
 		try:
-			self.Cursor.execute(f"UPDATE compañero SET ID=?, Nombre=?, matricula=? WHERE ID="+ idd, datos2)
+			self.Cursor.execute(f"UPDATE compañero SET ID={datos2[0]}, Nombre='{datos2[1]}', matricula={datos2[2]} WHERE ID={id}")
 			self.conexion.commit()
 
 			fnc.Func("Limpiar")
 			self.loc.LOG_COMMAND(1, "CONEXION: Los valores establecidos")
 			print("CONEXION: Los valores establecidos")
    
-		except Error:
+		except self.conexion.Error as ERRN:
 			fnc.Func("Limpiar")
-			self.loc.LOG_COMMAND(2, f"CONEXION: Los valores de entrada no pueden ser establecidos// {Error}")
-			print("CONEXION: Los valores de entrada no pueden ser establecidos " + str(Error))
+			self.loc.LOG_COMMAND(2, f"CONEXION: {ERRN}")
+			print("CONEXION: Los valores de entrada no pueden ser establecidos")
 
 	def Borrar_DB(self, iD):
 		try:
@@ -98,9 +98,9 @@ class sql3:
 			self.loc.LOG_COMMAND(1, "CONEXION: Datos eleminados correctamente")
 			print("CONEXION: Datos eleminados correctamente")
 
-		except Error:
+		except self.conexion.Error as ERRN:
 			fnc.Func("Limpiar")
-			self.loc.LOG_COMMAND(1, f"CONEXION: No se pudieron eleminar los datos// {Error}")
+			self.loc.LOG_COMMAND(1, f"CONEXION: {ERRN}")
 			print("CONEXION: No se pudieron eleminar los datos")
 
 
