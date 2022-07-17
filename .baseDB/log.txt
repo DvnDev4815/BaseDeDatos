@@ -1,0 +1,6 @@
+11:23:37(SUCCES) CONEXION: Los valores establecidos 
+11:23:37(SUCCES) CONEXION: Base se datos establecida 
+11:23:37(SUCCES) CONEXION: Lista creada 
+11:24:33(SUCCES) CONEXION: Los valores establecidos 
+11:24:33(SUCCES) CONEXION: Base se datos establecida 
+11:24:33(ERROR) CONEXION table compañero already exists

@@ -25,7 +25,7 @@ class Insercion_datos(tkinter.Toplevel):
         self.Lb_nombre=ttk.Label(self, text= "Nombre(Completo): ")
         self.Lb_nombre.place(x=35, y=23 )
         
-        self.Lb_matricula=ttk.Label(self, text= "Matricula:")
+        self.Lb_matricula=ttk.Label(self, text= "Matricula:", state="Onlynumbers")
         self.Lb_matricula.place(x=10, y=63 )
         
         #---- Entradas ----
@@ -54,7 +54,7 @@ class Insercion_datos(tkinter.Toplevel):
         
     #Metodo para incertar los datos a la base
     def _Acept(self):
-        self.data= [int(self.var_ID.get()), self.var_Nombre.get(), int(self.var_Matricula.get())]
+        self.data= [int(self.var_ID.get()), self.var_Nombre.get(), self.var_Matricula.get()]
         Conx.InsertarNuevos_DB(self.data)
         Func.Esperar(1)
         self._Cancel()
