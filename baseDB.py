@@ -11,7 +11,13 @@ else:
     
 class Log:
     def __init__(self)-> None:
-        self.ARCHIVO= open("log.txt", "w")
+        self.Nm_Archivo= "log.txt"
+        
+        if self.Nm_Archivo in os.listdir():
+            self.ARCHIVO= open(self.Nm_Archivo, "a")
+        else:
+            self.ARCHIVO= open(self.Nm_Archivo, "w")
+         
         self.time= datetime.datetime.now()
         self.date= self.time.strftime("%H:%M:%S")
         
